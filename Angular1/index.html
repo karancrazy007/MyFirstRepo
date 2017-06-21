@@ -1,0 +1,106 @@
+<!doctype html>
+<html ng-app="newApp">
+  <meta charset="UTF-8"></meta>
+
+  <head>
+
+    <title> Angular Demo</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+    <script src="newApp.js"></script>
+
+    <style>
+
+      .ot {
+        background: #403A3A;
+        color: white;
+      }
+
+      .ut {
+        background: white;
+        color: #403A3A;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      li{
+        display: flex;
+        margin-bottom:1px;
+      }
+
+      li span {
+        display: block;
+        line-height: 50px;
+      }
+
+      li img {
+        margin-right: 10px;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+      }
+
+      .anim.ng-enter, ul.ng-leave{
+        position: absolute;
+      }
+
+      .anim.ng-enter {
+        animation: slideInRight 0.3s both ease-in; z-index: 8888;
+        -webkit-animation: slideInRight 0.3s both ease-in; z-index: 8888;
+      }
+      .anim.ng-leave {
+        animation: slideOutLeft 0.3s  ease-out; z-index: ;
+        -webkit-animation: slideOutLeft 0.3s ease-out; z-index: ;
+      }
+
+
+      @keyframes slideOutLeft {
+          to      { transform: translateX(-100%); }
+      }
+
+      @-webkit-keyframes slideOutLeft {
+          to      { transform: translateX(-100%); }
+      }
+
+
+      @keyframes slideInRight {
+          from    { transform: translateX(100%); }
+          to      { transform: translateX(0); }
+      }
+
+      @-webkit-keyframes slideOutRight {
+
+          to      { transform: translateX(100%); }
+      }
+
+    </style>
+
+  </head>
+
+  <body ng-controller="appController as appList">
+
+    <form ng-submit="appList.addPerson()">
+      <input type="text" placeholder="name.." ng-model="appList.name">
+      <input type="text" placeholder="img.." ng-model="appList.img">
+      <input type="number" placeholder="age.." ng-model="appList.age">
+      <input type="submit" ng-model="submit">
+      <button ng-if="!appList.toggle" ng-click="appList.toggle = true">SHOW</button>
+      <button ng-if="appList.toggle" ng-click="appList.toggle = false">HIDE</button>
+    </form>
+
+
+
+    <ul ng-if="appList.toggle" class="anim">
+      <li ng-repeat="item in appList.list " class="anim">
+        <img class="anim" ng-src="{{item.img}}"/> <span class="anim">{{item.name | uppercase}} -    <em>{{item.age }}</em></span>
+      </li>
+
+    </ul>
+
+
+  </body>
+
+</html>
